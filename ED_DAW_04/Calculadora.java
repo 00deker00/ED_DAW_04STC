@@ -9,6 +9,7 @@ import org.eclipse.swt.widgets.Text;
 import javax.swing.JOptionPane;
 //import org.w3c.dom.Text;
 
+//CLASE PRINCIPAL CALCULADORA
 public class Calculadora {
 
     // Constantes
@@ -24,17 +25,23 @@ public class Calculadora {
     String operacion;
     boolean inicializa_resultado;
 
+
+    /**
+     * //TEXTO DONDE SE MUESTRA EL RESULTADO
+     */
     private static Text texto_resultado;
 
+    //CONSTRUCTOR DE LA CALCULADORA
     public Calculadora(boolean gui) {
 
         //Inicialización de las variables.
         inicializa();
-
+//SI SE ESPECIFICA ESTO, SE DIBUJA LA INTERFAZ GRÁFICA DE LA CALCULADORA.
         if (gui==true) dibujaCalculadora();
 
     }
-
+    //MÉTODO PARA DIBUJAR LA INTERFAZ GRÁFICA DE LA CALCULADORA.
+//DISPLAY ES LA REPRESENTACIÓN DE LA PANTALLA EN LA QUE SE MOSTRARÁ LA INTERFAZ Y SHELL LA VENTANA PRINCIPAL DE LA APLICACIÓN
     private void dibujaCalculadora() {
 
         Display display = Display.getDefault();
@@ -42,6 +49,7 @@ public class Calculadora {
         shlCalculadora.setSize(259, 250);
         shlCalculadora.setText("Calculadora");
 
+//CODIGO PARA CREAR LOS BOTONES NUMÉRICOS DEL 0 AL 9. CADA UNO TIENE ASOCIADO UN MÉTODO ANADENUEVODIGITO CUANDO ES SELECCIONADO.
         //------------------------------------------------ -
         //Números
         //------------------------------------------------ -
@@ -160,6 +168,8 @@ public class Calculadora {
         //Operaciones
         //------------------------------------------------ -
 
+//SE CREAN OPERACIONES BÁSICAS, DIVISIÓN, RESTA, SUMA, MULTIPLICACIÓN Y EL BOTÓN IGUAL. CADA UNO ASOCIADO A LOS MÉTODOS CORRESPONDIENTES.
+
         //botón con la operacion de división
         Button button_12 = new Button(shlCalculadora, SWT.NONE);
         button_12.addSelectionListener(new SelectionAdapter() {
@@ -229,6 +239,7 @@ public class Calculadora {
         }
     }
 
+    //INICIALIZA LAS VARIABLES DE LA CALCULADORA
     public void inicializa() {
         operacion = "null";
         valor1 = 0;
@@ -237,6 +248,8 @@ public class Calculadora {
         inicializa_resultado = true;
     }
 
+
+    //ESTOS TRES OBTIENEN Y ESTABLECEN EL RESULTADO:
     public String getResultadoString (){
         return texto_resultado.getText();
     }
@@ -250,6 +263,7 @@ public class Calculadora {
         return Integer.parseInt(resultado);
     }
 
+    //AÑADE UN NUEVO DÍGITO AL RESULTADO
     public void anadeNuevoDigito(int digito){
         if (inicializa_resultado)
             setResultadoString("");
@@ -268,6 +282,7 @@ public class Calculadora {
         inicializa_resultado = false;
     }
 
+    //EJECUTA UNA OPERACIÓN Y ALMACENA EL OPERADOR ACTUAL
     public void ejecutarOperador(String new_operacion) {
 
         int resultado;
@@ -290,6 +305,8 @@ public class Calculadora {
         operacion = new_operacion;
     }
 
+
+    //EJECUTA LA OPERACIÓN DE IGUAL
     public void ejecutarIgual(){
         int resultado = 0;
 
@@ -300,6 +317,7 @@ public class Calculadora {
         operacion = "null";
     }
 
+    //REALIZA LA OPERACIÓN MATEMÁTICA
     public int ejecutarOperacion() {
         int resultado = 0;
 
@@ -330,6 +348,7 @@ public class Calculadora {
         return resultado;
     }
 
+    //MUESTRA EL RESULTADO EN LA INTERFAZ
     public void muestraResultado(int resultado){
         setResultadoString(Integer.toString(resultado));
         valor1 = resultado;
@@ -337,6 +356,7 @@ public class Calculadora {
         inicializa_resultado = true;
     }
 
+    //METODO MAIN QUE CREA LA INSTANCIA DE CALCULADORA CON LA INTERFAZ GRÁFICA GUI=TRUE
     public static void main(String args[]) {
         Calculadora calculadora = new Calculadora(true);
     }
